@@ -65,7 +65,9 @@ class Related(fields.Nested):
 
     def _deserialize(self, value, attr, data, **kwargs):
         if isinstance(value, str):
-            return int(value)
+            if value.isnumeric():
+                return int(value)
+            return value
 
         return super(Related, self)._deserialize(value, attr, data)
 
